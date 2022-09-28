@@ -39,8 +39,8 @@ public class App {
 		}
 
 		private void loadData() {
-			// loadCategories();
-			// loadProducto();
+			loadCategories();
+			loadProducto();
 		}
 
 		

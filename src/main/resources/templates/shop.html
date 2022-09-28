@@ -75,7 +75,7 @@
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-12">
                 <!-- TEST Start -->
-                <form id="filtros">
+                <form id="filtros" method="get" action="/">
                     <div th:each="filtro,iterStat :${filtros}"
                         th:classappend="${!iterStat.last}? 'border-bottom mb-4 pb-4' : 'mb-5'">
                         <h5 class="font-weight-semi-bold mb-4" th:inline="text"> Filtrar por [[${filtro.nombre}]]</h5>

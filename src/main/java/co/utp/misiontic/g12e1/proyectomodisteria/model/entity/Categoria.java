@@ -33,7 +33,7 @@ public class Categoria {
 
     //-------RELACIONES
     @ManyToMany(mappedBy="categorias", fetch = FetchType.EAGER)
-    private List<Producto> productos = new ArrayList<>();;
+    private List<Producto> productos = new ArrayList<>();
 
     //-------CONSTRUCTOR
     public Categoria(String name) {
