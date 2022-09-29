@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.CheckFiltroDto;
@@ -17,11 +17,12 @@ import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.FiltroDto;
 import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.FiltroRequest;
 import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.ProductoDto;
 import co.utp.misiontic.g12e1.proyectomodisteria.service.CatalogoService;
-import co.utp.misiontic.g12e1.proyectomodisteria.service.ProductoService;
+
 import lombok.extern.slf4j.Slf4j;
 
+
 @Controller
-@Slf4j
+// @Slf4j
 public class CatalogoController {
 
     private ProductoService productoSVC;

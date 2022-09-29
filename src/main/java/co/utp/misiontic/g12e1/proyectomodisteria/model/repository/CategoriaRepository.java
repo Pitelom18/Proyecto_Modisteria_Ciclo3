@@ -1,11 +1,11 @@
 package co.utp.misiontic.g12e1.proyectomodisteria.model.repository;
 
-import java.util.List;
+// import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Categoria;
-import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Producto;
+// import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Producto;
 
 public interface CategoriaRepository extends JpaRepository<Categoria,Long> {
 
