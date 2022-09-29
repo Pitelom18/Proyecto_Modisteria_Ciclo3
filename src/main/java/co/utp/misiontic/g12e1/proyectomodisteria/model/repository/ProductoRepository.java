@@ -27,6 +27,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
   @Query(
   " SELECT DISTINCT p "
   +"FROM Producto p JOIN p.categorias c "
-  +"WHERE c.name IN :filtros")
+  +"WHERE c.name IN :filtros "
+  +"ORDER BY p.name ASC ")
   List<Producto> busquedaFiltrada(List<String> filtros);
 }
