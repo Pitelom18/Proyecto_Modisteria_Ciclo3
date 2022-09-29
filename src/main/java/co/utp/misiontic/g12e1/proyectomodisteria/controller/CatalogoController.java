@@ -38,10 +38,10 @@ public class CatalogoController {
 
     @GetMapping("/shop")
     public String goToShop(@ModelAttribute FiltroRequest filtroRequest, Model modelo) {
-        System.out.println(filtroRequest.getFiltro());
+        var formFiltro = filtroRequest.getFiltro();
 
         List<ProductoDto> productos;
-        productos = productoSVC.buscarProductosFiltrados(filtroRequest.getFiltro());
+        productos = productoSVC.buscarProductosFiltrados(formFiltro);
         modelo.addAttribute("productos", productos);
 
         var filtros = Arrays.asList(
@@ -56,10 +56,12 @@ public class CatalogoController {
                         new CheckFiltroDto("filtro", "Diario", "diario"),
                         new CheckFiltroDto("filtro", "Fisica", "fisica"))));
 
-        for(FiltroDto fdto: filtros){
-            for(CheckFiltroDto chk : fdto.getItems()){
-                if(filtroRequest.getFiltro().contains(chk.getValue())){
-                    chk.setChecked(true);
+        if (formFiltro != null) {
+            for (FiltroDto fdto : filtros) {
+                for (CheckFiltroDto chk : fdto.getItems()) {
+                    if (formFiltro.contains(chk.getValue())) {
+                        chk.setChecked(true);
+                    }
                 }
             }
         }
