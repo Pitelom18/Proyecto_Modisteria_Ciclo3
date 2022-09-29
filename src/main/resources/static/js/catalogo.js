@@ -1,12 +1,12 @@
 const form = document.querySelector('#filtros');
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const request = new XMLHttpRequest();
-    request.open("POST", "/shop");
-    request.send(formData);
-});
+// form.addEventListener('submit', e => {
+//     e.preventDefault();
+//     const formData = new FormData(e.currentTarget);
+//     const request = new XMLHttpRequest();
+//     request.open("POST", "/shop");
+//     request.send(formData);
+// });
 
 const loadProductByFilter = () => {
 
