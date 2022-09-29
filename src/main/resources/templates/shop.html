@@ -82,7 +82,7 @@
 
                         <div th:each="item : ${filtro.items}"
                             class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" th:name="${item.name}" class="custom-control-input"
+                            <input type="checkbox" th:checked="${item.checked}" th:name="${item.name}" class="custom-control-input"
                                 th:value="${item.value}" th:id="${item.value}">
                             <label class="custom-control-label" th:for="${item.value}" th:text="${item.tag}">All
                                 Precio</label>
@@ -108,13 +108,12 @@
                                             class="input-group-text bg-transparent text-primary">
                                             <i class="fa fa-search"></i>
                                         </button>
+                                        
                                     </div>
                                 </div>
                             </form>
                             <!-- test -->
-                            <button type="submit" form="filtros" class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </button>
+                            
                             <div class="dropdown ml-4">
                                 <button class="btn border dropdown-toggle" type="button" id="triggerId"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

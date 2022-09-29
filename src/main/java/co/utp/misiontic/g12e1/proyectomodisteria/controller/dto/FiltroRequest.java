@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FiltroRequest {
 
-    private List<String> filtros;
+    private List<String> filtro;
 
     
 }

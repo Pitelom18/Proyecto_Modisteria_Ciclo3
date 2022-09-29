@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
+import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.ProductoDto;
 import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Categoria;
 import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Producto;
 // import co.utp.misiontic.g12e1.proyectomodisteria.model.repository.CategoriaRepository;
@@ -48,6 +50,33 @@ public class ProductoServiceImpl implements ProductoService {
     public Producto saveProductos(List<Producto> productos) {
         
         return null;
+    }
+
+    @Override
+    public List<ProductoDto> buscarProductosFiltrados(List<String> filtros) {
+        
+        if(filtros ==  null){
+            return getProductos();
+        }else{
+            return productoRepository.busquedaFiltrada(filtros).stream()
+                .map(p -> new ProductoDto(
+                    p.getIdProducto().intValue(),
+                    p.getPrecio(),
+                    p.getName(),
+                    p.getImageUrl()
+                ))
+                .collect(Collectors.toList());
+        }
+        
+    }
+
+    @Override
+    public List<ProductoDto> getProductos() {
+        var productos = productoRepository.findAll(Sort.by("name"));
+        
+        return productos.stream()
+                .map(p->new ProductoDto(p.getIdProducto().intValue(), p.getPrecio(), p.getName(),p.getImageUrl()))
+                .collect(Collectors.toList());
     }
 
     // @Override
