@@ -2,6 +2,7 @@ package co.utp.misiontic.g12e1.proyectomodisteria.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,16 +17,17 @@ import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.FiltroDto;
 import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.FiltroRequest;
 import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.ProductoDto;
 import co.utp.misiontic.g12e1.proyectomodisteria.service.CatalogoService;
+import co.utp.misiontic.g12e1.proyectomodisteria.service.ProductoService;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 public class CatalogoController {
 
-    private CatalogoService catService;
+    private ProductoService productoSVC;
 
-    public CatalogoController(CatalogoService catService) {
-        this.catService = catService;
+    public CatalogoController(ProductoService prodService) {
+        this.productoSVC = prodService;
     }
 
     @GetMapping(value = { "/", "/index", "/index.html" })
@@ -36,14 +38,13 @@ public class CatalogoController {
 
     @GetMapping("/shop")
     public String goToShop(@ModelAttribute FiltroRequest filtroRequest, Model modelo) {
-        System.out.println(filtroRequest.getFiltros());
+        System.out.println(filtroRequest.getFiltro());
 
         List<ProductoDto> productos;
-        productos = catService.getProductos();
+        productos = productoSVC.buscarProductosFiltrados(filtroRequest.getFiltro());
         modelo.addAttribute("productos", productos);
 
         var filtros = Arrays.asList(
-
                 new FiltroDto("Colegios", Arrays.asList(
                         new CheckFiltroDto("filtro", "Colegio A", "col-a"),
                         new CheckFiltroDto("filtro", "Colegio B", "col-b"))),
@@ -54,6 +55,14 @@ public class CatalogoController {
                 new FiltroDto("Tipo de Uniforme", Arrays.asList(
                         new CheckFiltroDto("filtro", "Diario", "diario"),
                         new CheckFiltroDto("filtro", "Fisica", "fisica"))));
+
+        for(FiltroDto fdto: filtros){
+            for(CheckFiltroDto chk : fdto.getItems()){
+                if(filtroRequest.getFiltro().contains(chk.getValue())){
+                    chk.setChecked(true);
+                }
+            }
+        }
         modelo.addAttribute("filtros", filtros);
 
         modelo.addAttribute("page", "shop");
@@ -61,31 +70,32 @@ public class CatalogoController {
         return "shop";
     }
     // @PostMapping("/shop")
-    // public String goToShopa(@RequestBody FiltroRequest filtroRequest, Model modelo) {
+    // public String goToShopa(@RequestBody FiltroRequest filtroRequest, Model
+    // modelo) {
 
-    //     System.out.println(filtroRequest.getFiltros().get(0));
+    // System.out.println(filtroRequest.getFiltros().get(0));
 
-    //     List<ProductoDto> productos;
-    //     productos = catService.getProductos();
-    //     modelo.addAttribute("productos", productos);
+    // List<ProductoDto> productos;
+    // productos = catService.getProductos();
+    // modelo.addAttribute("productos", productos);
 
-    //     var filtros = Arrays.asList(
+    // var filtros = Arrays.asList(
 
-    //             new FiltroDto("Colegios", Arrays.asList(
-    //                     new CheckFiltroDto("filtro", "Colegio A", "col-a"),
-    //                     new CheckFiltroDto("filtro", "Colegio B", "col-b"))),
-    //             new FiltroDto("Producto", Arrays.asList(
-    //                     new CheckFiltroDto("filtro", "Pantalon", "pantalon"),
-    //                     new CheckFiltroDto("filtro", "Camisa", "camisa"),
-    //                     new CheckFiltroDto("filtro", "Otros", "otros"))),
-    //             new FiltroDto("Tipo de Uniforme", Arrays.asList(
-    //                     new CheckFiltroDto("filtro", "Diario", "diario"),
-    //                     new CheckFiltroDto("filtro", "Fisica", "fisica"))));
-    //     modelo.addAttribute("filtros", filtros);
+    // new FiltroDto("Colegios", Arrays.asList(
+    // new CheckFiltroDto("filtro", "Colegio A", "col-a"),
+    // new CheckFiltroDto("filtro", "Colegio B", "col-b"))),
+    // new FiltroDto("Producto", Arrays.asList(
+    // new CheckFiltroDto("filtro", "Pantalon", "pantalon"),
+    // new CheckFiltroDto("filtro", "Camisa", "camisa"),
+    // new CheckFiltroDto("filtro", "Otros", "otros"))),
+    // new FiltroDto("Tipo de Uniforme", Arrays.asList(
+    // new CheckFiltroDto("filtro", "Diario", "diario"),
+    // new CheckFiltroDto("filtro", "Fisica", "fisica"))));
+    // modelo.addAttribute("filtros", filtros);
 
-    //     modelo.addAttribute("page", "shop");
+    // modelo.addAttribute("page", "shop");
 
-    //     return "shop";
+    // return "shop";
     // }
 
     @RequestMapping("/detail")

@@ -13,4 +13,8 @@ public interface ProductoService {
 
     public Producto saveProductos(List<Producto> productos);
 
+    public List<ProductoDto> buscarProductosFiltrados(List<String> filtros);
+
+    public List<ProductoDto> getProductos();
+
 }
