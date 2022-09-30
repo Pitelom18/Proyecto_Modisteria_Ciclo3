@@ -9,7 +9,7 @@ import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Producto;
 
 public interface CategoriaRepository extends JpaRepository<Categoria,Long> {
 
-    Categoria findAllByidCategoria(Long categoriaId);
+    Categoria findByidCategoria(Long categoriaId);
     // List<Producto> findAllByCategoriaId(Long categoriaId);
 
     // List<Producto> findAllProducto();
