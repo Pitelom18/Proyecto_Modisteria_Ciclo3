@@ -55,6 +55,7 @@ public class App {
 		}
 
 		private void loadData() {
+
 			System.out.println("------------LOAD-DATA------------");
 			loadCategories();
 			loadProducto();
@@ -64,6 +65,7 @@ public class App {
 		private void loadItems(){
 			itemsvc.insertItem(1001L, 1001L, 2);
 			System.out.println("ITEMS GUARDADOS");
+
 		}
 
 		public void loadUsers() {
