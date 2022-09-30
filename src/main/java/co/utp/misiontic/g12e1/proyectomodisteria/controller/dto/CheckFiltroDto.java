@@ -11,5 +11,11 @@ public class CheckFiltroDto {
     private String name;
     private String tag;
     private String value;
+    private Boolean checked;
 
+    public CheckFiltroDto(String name, String tag, String value){
+        this.name = name;
+        this.tag = tag;
+        this.value = value;
+    }
 }

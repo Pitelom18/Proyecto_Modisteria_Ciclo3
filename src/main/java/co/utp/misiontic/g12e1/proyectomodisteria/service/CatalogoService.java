@@ -7,7 +7,5 @@ import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.ProductoDto;
 
 public interface CatalogoService {
 
-    List<ProductoDto> getProductos();
-
     List<ProductoDto> getProductosByCategoryId(Integer categoryId);
 }

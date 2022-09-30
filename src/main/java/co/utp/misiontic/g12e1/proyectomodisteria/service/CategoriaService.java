@@ -5,5 +5,5 @@ import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Categoria;
 
 public interface CategoriaService {
 
-    public Categoria findCategoriaById (Long categoriaId);
+    
 }

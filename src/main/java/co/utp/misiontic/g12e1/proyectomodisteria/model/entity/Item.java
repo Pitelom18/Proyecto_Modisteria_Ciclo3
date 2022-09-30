@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,30 +19,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-// @Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pedido" , "producto"})})
-public class Item implements Serializable{
-
-    @Embeddable
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    static class ItemPk implements Serializable {
-        //-------RELACIONES
-        @ManyToOne
-        @JoinColumn(name = "id_producto")
-        private Producto producto;
-
-        @ManyToOne
-        @JoinColumn(name = "id_pedido")
-        private Pedido pedido;
-
-    }
-
-    @EmbeddedId
-    private ItemPk id;
-
-    @Column(nullable = false)
-    private Integer cantidad;
+@Builder
+// @Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pedido" ,
+// "producto"})})
+public class Item implements Serializable {
 
     
+    
+
+    @EmbeddedId
+    private ItemPk idItem;
+
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 1 CHECK (quantity>= 0)")
+    private Integer quantity;
+
 }

@@ -22,14 +22,7 @@ public class CatalogoServiceImpl implements CatalogoService{
     private final ProductoRepository productoRepository;
     // private final CategoriaRepository categoriaRepository;
 
-    @Override
-    public List<ProductoDto> getProductos() {
-        var productos = productoRepository.findAll(Sort.by("name"));
-        
-        return productos.stream()
-                .map(p->new ProductoDto(p.getIdProducto().intValue(), p.getPrecio(), p.getName(),p.getImageUrl()))
-                .collect(Collectors.toList());
-    }
+    
 
     @Override
     public List<ProductoDto> getProductosByCategoryId(Integer categoryId) {

@@ -43,7 +43,7 @@
     <div class="container-fluid">
         <div class="row border-top px-xl-5">
 
-            <!-- NAVBAR - categories -->            
+            <!-- NAVBAR - categories -->
             <div th:replace="layout/navbar :: navbar-categories"></div>
 
             <div class="col-lg-9">
@@ -56,16 +56,16 @@
 
 
     <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5">
+    <!-- <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Our Shop</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Nuestra Tienda</h1>
             <div class="d-inline-flex">
-                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0"><a href="">Inicio</a></p>
                 <p class="m-0 px-2">-</p>
-                <p class="m-0">Shop</p>
+                <p class="m-0">Tienda</p>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Page Header End -->
 
 
@@ -75,154 +75,21 @@
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-12">
                 <!-- TEST Start -->
-                <form id="filtros">
+                <form id="filtros" action="/shop">
                     <div th:each="filtro,iterStat :${filtros}"
                         th:classappend="${!iterStat.last}? 'border-bottom mb-4 pb-4' : 'mb-5'">
                         <h5 class="font-weight-semi-bold mb-4" th:inline="text"> Filtrar por [[${filtro.nombre}]]</h5>
 
                         <div th:each="item : ${filtro.items}"
                             class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" th:name="${item.name}" class="custom-control-input"
+                            <input type="checkbox" th:checked="${item.checked}" th:name="${item.name}" class="custom-control-input"
                                 th:value="${item.value}" th:id="${item.value}">
                             <label class="custom-control-label" th:for="${item.value}" th:text="${item.tag}">All
                                 Precio</label>
                             
                         </div>
-
-
                     </div>
                 </form>
-
-                <!-- TEST End -->
-                <!-- Price Start -->
-                <!-- <div class="border-bottom mb-4 pb-4">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
-                    <form>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="price-all">
-                            <label class="custom-control-label" for="price-all">All Price</label>
-                            <span class="badge border font-weight-normal">1000</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1">
-                            <label class="custom-control-label" for="price-1">$0 - $100</label>
-                            <span class="badge border font-weight-normal">150</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2">
-                            <label class="custom-control-label" for="price-2">$100 - $200</label>
-                            <span class="badge border font-weight-normal">295</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3">
-                            <label class="custom-control-label" for="price-3">$200 - $300</label>
-                            <span class="badge border font-weight-normal">246</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-4">
-                            <label class="custom-control-label" for="price-4">$300 - $400</label>
-                            <span class="badge border font-weight-normal">145</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="price-5">
-                            <label class="custom-control-label" for="price-5">$400 - $500</label>
-                            <span class="badge border font-weight-normal">168</span>
-                        </div>
-                    </form>
-                </div> -->
-                <!-- Price End -->
-
-                <!-- Color Start -->
-                <!-- <div class="border-bottom mb-4 pb-4">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
-                    <form>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="color-all"
-                            th:each="filtro: ${filtros}">
-                            <label class="custom-control-label" for="price-all">All Color</label>
-                            <span class="badge border font-weight-normal">1000</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-1">
-                            <label class="custom-control-label" for="color-1">Black</label>
-                            <span class="badge border font-weight-normal">150</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-2">
-                            <label class="custom-control-label" for="color-2">White</label>
-                            <span class="badge border font-weight-normal">295</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-3">
-                            <label class="custom-control-label" for="color-3">Red</label>
-                            <span class="badge border font-weight-normal">246</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-4">
-                            <label class="custom-control-label" for="color-4">Blue</label>
-                            <span class="badge border font-weight-normal">145</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="color-5">
-                            <label class="custom-control-label" for="color-5">Green</label>
-                            <span class="badge border font-weight-normal">168</span>
-                        </div>
-                    </form>
-                </div> -->
-                <!-- Color End -->
-
-                <!-- Size Start -->
-                <!-- <div class="mb-5">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
-                    <form>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="size-all">
-                            <label class="custom-control-label" for="size-all">All Size</label>
-                            <span class="badge border font-weight-normal">1000</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-1">
-                            <label class="custom-control-label" for="size-1">XS</label>
-                            <span class="badge border font-weight-normal">150</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-2">
-                            <label class="custom-control-label" for="size-2">S</label>
-                            <span class="badge border font-weight-normal">295</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-3">
-                            <label class="custom-control-label" for="size-3">M</label>
-                            <span class="badge border font-weight-normal">246</span>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-4">
-                            <label class="custom-control-label" for="size-4">L</label>
-                            <span class="badge border font-weight-normal">145</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="size-5">
-                            <label class="custom-control-label" for="size-5">XL</label>
-                            <span class="badge border font-weight-normal">168</span>
-                        </div>
-                    </form>
-                </div> -->
-                <!-- Size End -->
             </div>
             <!-- Shop Sidebar End -->
 
@@ -241,9 +108,12 @@
                                             class="input-group-text bg-transparent text-primary">
                                             <i class="fa fa-search"></i>
                                         </button>
+                                        
                                     </div>
                                 </div>
                             </form>
+                            <!-- test -->
+                            
                             <div class="dropdown ml-4">
                                 <button class="btn border dropdown-toggle" type="button" id="triggerId"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -259,39 +129,9 @@
                         <p>No Hay Productos que Cumplan los Filtros</p>
                     </div>
 
-                    <!-- Primera prueba de generacion -->
-                    <!-- <div th:if="${!productos.isEmpty()}" th:each="producto: ${productos}" class="col">
-                        <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-                            <div class="card product-item border-0 mb-4">
-                                <div
-                                    class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                    
-                                    <img class="img-fluid w-100" alt=""
-                                        th:src="${producto.imageUrl != null ? producto.imageUrl : 'img/product-7.jpg' }">
-                                </div>
-                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                    
-                                    <h6 class="text-truncate mb-3" th:text="${producto.nombre}">Nombre del producto</h6>
-                                    <div class="d-flex justify-content-center">
-                                        
-                                        <h6
-                                            th:text="${#numbers.formatDecimal(producto.precio,1,'POINT',2,'COMMA')}">Precio</h6>
-                                        <h6 class="text-muted ml-2"                                            >
-                                            <del th:text="${#numbers.formatDecimal(producto.precio,1,'POINT',2,'COMMA')}">
-                                                Precio Sin Descuento</del>
-                                        </h6>
-                                    </div>
-                                </div>
-                                <div class="card-footer d-flex justify-content-between bg-light border">
-                                    <a href="" class="btn btn-sm text-dark p-0"><i
-                                            class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                    <a href="" class="btn btn-sm text-dark p-0"><i
-                                            class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+                    
                     <!-- col-12 pb-1 -->
+                    <!-- CARTAS DE RPRODUCTOS -->
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1" th:if="${!productos.isEmpty()}"
                         th:each="producto: ${productos}">
                         <div class="card product-item border-0 mb-4">
@@ -316,10 +156,12 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
+
                                 <a href="" class="btn btn-sm text-dark p-0"><i
                                         class="fas fa-eye text-primary mr-1"></i>Ver detalle</a>
                                 <a href="" class="btn btn-sm text-dark p-0"><i
                                         class="fas fa-shopping-cart text-primary mr-1"></i>Agregar al carrito</a>
+
                             </div>
                         </div>
                     </div>

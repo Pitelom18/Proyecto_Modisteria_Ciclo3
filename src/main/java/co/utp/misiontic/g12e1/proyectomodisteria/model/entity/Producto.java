@@ -26,49 +26,46 @@ import lombok.NoArgsConstructor;
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProducto;
 
-    @Column(name = "Nombre" , nullable = false , length = 100)
+    @Column(name = "Name", nullable = false, length = 100)
     private String name;
-    @Column(name = "Precio", nullable = false, length = 100)
-    private Double precio;
-    @Column(name = "Descripcion" , length = 255)
-    private String descripcion;
-    @Column(name = "Imagen", length = 100)
+    @Column(name = "Price", nullable = false, length = 100)
+    private Double price;
+    @Column(name = "Description", length = 255)
+    private String description;
+    @Column(name = "ImageUrl", length = 100)
     private String imageUrl;
-    
 
-    //-------RELACIONES
+    // -------RELACIONES
     @ManyToMany
-    @JoinTable(name = "Tag",
-    joinColumns=@JoinColumn(name="ID_Producto"),
-    inverseJoinColumns=@JoinColumn(name="ID_Categoria"))
-    private List<Categoria> categorias= new ArrayList<>();
+    @JoinTable(name = "Tag", joinColumns = @JoinColumn(name = "ID_Producto"), inverseJoinColumns = @JoinColumn(name = "ID_Categoria"))
+    private List<Categoria> categories;
 
     @ManyToMany
-    @JoinTable(name = "Molde",
-    joinColumns=@JoinColumn(name="ID_Producto"),
-    inverseJoinColumns=@JoinColumn(name="ID_Talla"))
-    private List<Talla> tallas= new ArrayList<>();;
+    @JoinTable(name = "Molde", joinColumns = @JoinColumn(name = "ID_Producto"), inverseJoinColumns = @JoinColumn(name = "ID_Talla"))
+    private List<Talla> sizes;
 
-    
-    @OneToMany(mappedBy = "id.producto")
+    @OneToMany(mappedBy = "idItem.product")
     private List<Item> compras;
 
-    //-------CONSTRUCTOR
-    public Producto(String name, Double precio, String imageUrl ){
-        this.name = name;
-        this.precio = precio;
-        this.imageUrl= imageUrl;
+    // -------CONSTRUCTOR
+    // public Producto(String name, Double price, String imageUrl ){
+    // this.name = name;
+    // this.price = price;
+    // this.imageUrl= imageUrl;
+    // }
+    public Producto(Long idProducto) {
+        this.idProducto = idProducto;
     }
 
-    public Producto(Long id, String name, Double precio, String imageUrl, List<Categoria> categorias){
-        this.idProducto=id;
+    public Producto(Long id, String name, Double price, String imageUrl, List<Categoria> categories) {
+        this.idProducto = id;
         this.name = name;
-        this.precio = precio;
-        this.imageUrl= imageUrl;
-        this.categorias=categorias;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.categories = categories;
     }
-    
+
 }
