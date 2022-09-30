@@ -9,25 +9,26 @@ import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Producto;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
-  // List<Producto> findAllByCategoriaIdIn(List<Long> tags);
+    // List<Producto> findAllByCategoriaIdIn(List<Long> tags);
 
-  // Optional<Producto> findAllByCategoriaId(Long categoriaId);
+    // Optional<Producto> findAllByCategoriaId(Long categoriaId);
 
-  // JPQL -> Selects a objetos JPA
-  // @Query("SELECT m FROM Movie m WHERE m.category.id = :categoryId"
-  // + " AND (m.username like :name OR m.name like :name) ")
+    // JPQL -> Selects a objetos JPA
+    // @Query("SELECT m FROM Movie m WHERE m.category.id = :categoryId"
+    // + " AND (m.username like :name OR m.name like :name) ")
 
-  // Nativo -> SQL
-  // @Query(value = "SELECT m.* FROM movie m WHERE m.category_id = :categoryId"
-  // + " AND (m.username like :name OR m.name like :name)", nativeQuery = true)
-  // List<Movie> findParticular(Long categoryId, String name);
+    // Nativo -> SQL
+    // @Query(value = "SELECT m.* FROM movie m WHERE m.category_id = :categoryId"
+    // + " AND (m.username like :name OR m.name like :name)", nativeQuery = true)
+    // List<Movie> findParticular(Long categoryId, String name);
 
-  List<Producto> findAllByPrecio(Integer p);
+    List<Producto> findAllByPrice(Integer p);
 
-  @Query(
-  " SELECT DISTINCT p "
-  +"FROM Producto p JOIN p.categorias c "
-  +"WHERE c.name IN :filtros "
-  +"ORDER BY p.name ASC ")
-  List<Producto> busquedaFiltrada(List<String> filtros);
+    Producto findByidProducto(Long id);
+
+    @Query(" SELECT DISTINCT p "
+            + "FROM Producto p JOIN p.categories c "
+            + "WHERE c.name IN :filtros "
+            + "ORDER BY p.name ASC ")
+    List<Producto> busquedaFiltrada(List<String> filtros);
 }

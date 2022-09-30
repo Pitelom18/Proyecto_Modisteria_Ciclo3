@@ -14,8 +14,5 @@ public class CategoriaServiceImpl implements CategoriaService{
     
     private CategoriaRepository categoriaRepository;
 
-    @Override
-    public Categoria findCategoriaById (Long categoriaId) {
-        return categoriaRepository.findAllByidCategoria(categoriaId);
-    }
+
 }
