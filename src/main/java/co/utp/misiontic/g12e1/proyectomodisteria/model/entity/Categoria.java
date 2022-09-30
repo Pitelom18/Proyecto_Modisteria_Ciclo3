@@ -22,18 +22,18 @@ import lombok.NoArgsConstructor;
 public class Categoria {
 
     @Id
-    @Column(name = "ID_Categoria")
+    // @Column(name = "ID_Categoria")
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategoria;
 
-    @Column(name = "Nombre", nullable = false , length = 100)
+    @Column(name = "Name", nullable = false , length = 100)
     private String name;
-    @Column(name = "Descripcion", length = 255)
-    private String descripcion;
+    @Column(name = "Description", length = 255)
+    private String description;
 
     //-------RELACIONES
-    @ManyToMany(mappedBy="categorias", fetch = FetchType.EAGER)
-    private List<Producto> productos = new ArrayList<>();
+    @ManyToMany(mappedBy="categories", fetch = FetchType.EAGER)
+    private List<Producto> products ;
 
     //-------CONSTRUCTOR
     public Categoria(String name) {

@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Talla {
 
     @Id
-    @Column(name = "ID_Talla")
+    // @Column(name = "ID_Talla")
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTalla;
 
@@ -30,6 +30,6 @@ public class Talla {
     private String talla;
 
     //-------RELACIONES
-    @ManyToMany(mappedBy="tallas", fetch = FetchType.EAGER)
-    private List<Producto> productos= new ArrayList<>();;
+    @ManyToMany(mappedBy="sizes", fetch = FetchType.EAGER)
+    private List<Producto> products;
 }
