@@ -33,8 +33,12 @@ public class App {
 
 		@Override
 		public void run(String... args) throws Exception {
-			System.out.println("-----LOAD DATA----------");
-			loadData();
+
+
+			System.out.println("---------------INIT--------------");
+
+			// loadData();
+
 
 		}
 
