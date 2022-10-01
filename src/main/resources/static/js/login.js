@@ -20,6 +20,32 @@ const login = () => {
 
 };
 
+const postToLogin = async (bodyObject) => {
+    const url = "/api/login";
+    const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(bodyObject),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (response.ok) {
+        const user = await response.json();
+
+        localStorage.setItem("loggedUser", JSON.stringify(user));
+        
+        alert("Bienvenido "+user.username+"!", "success");
+        
+        await new Promise(r => setTimeout(r, 2000));
+
+        window.location.href = "/catalog/filter";
+    } else {
+        const message = await response.text();
+        showError(message);
+    }
+};
+
 const showError = (message) => {
     alert(message, "danger");
 }
