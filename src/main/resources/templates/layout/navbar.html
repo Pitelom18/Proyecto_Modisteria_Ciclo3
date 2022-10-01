@@ -29,8 +29,8 @@
                 <a href="/contact" class="nav-item nav-link" th:classappend="${page == 'contact'} ? 'active' : ''">Contacto</a>
             </div>
             <div class="navbar-nav ml-auto py-0">
-                <a href="" class="nav-item nav-link">Login</a>
-                <a href="" class="nav-item nav-link">Registro</a>
+                <a href="/login" class="nav-item nav-link">Login</a>
+                <a href="/register" class="nav-item nav-link">Registro</a>
             </div>
         </div>
     </nav>
@@ -42,7 +42,7 @@
             <i class="fa fa-angle-down text-dark"></i>
         </a>
         <nav class="collapse navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical"  th:classappend="${page == 'index'} ? ' show' : ' position-absolute bg-light'" th:style="${page != 'index'} ? 'width: calc(100% - 30px); z-index: 1;'">
-            <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+            <div class="navbar-nav w-100 overflow-hidden" style="height: 369px">
                 
                 <a href="" class="nav-item nav-link">Camisas</a>
                 <a href="" class="nav-item nav-link">Camisetas</a>
