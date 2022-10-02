@@ -2,7 +2,6 @@ package co.utp.misiontic.g12e1.proyectomodisteria.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +15,12 @@ import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.CheckFiltroDto;
 import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.FiltroDto;
 import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.FiltroRequest;
 import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.ProductoDto;
-import co.utp.misiontic.g12e1.proyectomodisteria.service.CatalogoService;
 import co.utp.misiontic.g12e1.proyectomodisteria.service.ProductoService;
 import lombok.extern.slf4j.Slf4j;
 
 
 @Controller
-// @Slf4j
+@Slf4j
 public class CatalogoController {
 
     private ProductoService productoSVC;
