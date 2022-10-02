@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class UserResponse {
 
-    private String username;
+    private Integer clienteid;
     
     private String name;
 
