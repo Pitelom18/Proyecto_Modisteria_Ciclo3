@@ -28,9 +28,17 @@
                 </div>
                 <a href="/contact" class="nav-item nav-link" th:classappend="${page == 'contact'} ? 'active' : ''">Contacto</a>
             </div>
-            <div class="navbar-nav ml-auto py-0">
+
+            
+
+            <div id="logoutbtn" class="navbar-nav ml-auto py-0">
+                <a href="#" onclick="logout()" class="nav-item nav-link">Logout</a>
+                
+            </div>
+            
+            <div id="loginbtn" class="navbar-nav ml-auto py-0">
                 <a href="/login" class="nav-item nav-link">Login</a>
-                <a href="/register" class="nav-item nav-link">Registro</a>
+                <!-- <a href="/register" class="nav-item nav-link">Registro</a> -->
             </div>
         </div>
     </nav>

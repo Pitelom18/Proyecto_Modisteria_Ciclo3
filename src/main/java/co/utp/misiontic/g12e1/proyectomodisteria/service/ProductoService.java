@@ -18,4 +18,5 @@ public interface ProductoService {
 
     public List<ProductoDto> getProductos();
 
+    public ProductoDto getProductoDto(Integer productoId);
 }

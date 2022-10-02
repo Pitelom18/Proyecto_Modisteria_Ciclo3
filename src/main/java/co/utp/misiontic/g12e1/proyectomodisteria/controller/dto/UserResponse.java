@@ -1,5 +1,8 @@
 package co.utp.misiontic.g12e1.proyectomodisteria.controller.dto;
 
+
+import java.util.Map;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,6 +16,6 @@ public class UserResponse {
 
     private String email;
     
-    private CarroDto carro;
-
+    private Map carro;
+    
 }

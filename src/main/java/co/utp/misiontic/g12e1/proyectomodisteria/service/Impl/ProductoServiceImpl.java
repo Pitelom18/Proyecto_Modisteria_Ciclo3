@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ProductoServiceImpl implements ProductoService {
 
-    private ProductoRepository productoRepository;
+    private ProductoRepository productoRepo;
     private CategoriaServiceImpl categoriaSvc;
     private CategoriaRepository categoriaRepo;
 
@@ -43,7 +43,7 @@ public class ProductoServiceImpl implements ProductoService {
                 }).collect(Collectors.toList()));
 
         System.out.println("productos guardados");
-        return productoRepository.save(p_new);
+        return productoRepo.save(p_new);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ProductoServiceImpl implements ProductoService {
         if (filtros == null) {
             return getProductos();
         } else {
-            return productoRepository.busquedaFiltrada(filtros).stream()
+            return productoRepo.busquedaFiltrada(filtros).stream()
                     .map(p -> new ProductoDto(
                             p.getIdProducto().intValue(),
                             p.getPrice(),
@@ -71,20 +71,26 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public List<ProductoDto> getProductos() {
-        var productos = productoRepository.findAll(Sort.by("name"));
+        var productos = productoRepo.findAll(Sort.by("name"));
 
         return productos.stream()
                 .map(p -> new ProductoDto(p.getIdProducto().intValue(), p.getPrice(), p.getName(), p.getImageUrl()))
                 .collect(Collectors.toList());
     }
 
-    // @Override
-    // public List<Producto> saveProductos(List<Producto> productos) {
-
-    // productos.stream()
-
-    // return null;
-
-    // }
-
+    @Override
+    public ProductoDto getProductoDto(Integer productoId) {
+        var popt = productoRepo.findById(productoId.longValue());
+        if(popt.isEmpty()){
+            return null;
+        }else{
+            var p= popt.get();
+            return ProductoDto.builder()
+            .id(p.getIdProducto().intValue())
+            .precio(p.getPrice())
+            .nombre(p.getName())
+            .imageUrl(p.getImageUrl())
+            .build();
+        }
+    }
 }

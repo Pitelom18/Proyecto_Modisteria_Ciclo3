@@ -39,7 +39,7 @@ const postToLogin = async (bodyObject) => {
         
         await new Promise(r => setTimeout(r, 2000));
 
-        window.location.href = "/catalog/filter";
+        window.location.href = "/cart";
     } else {
         const message = await response.text();
         showError(message);

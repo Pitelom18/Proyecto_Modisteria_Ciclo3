@@ -33,7 +33,7 @@ public class Cliente {
     private String email;
     @Column(name="phone", nullable = false , length = 100)
     private String phone;
-    @Column(name="user", nullable = false , length = 100)
+    @Column(name="user", nullable = false , length = 100, unique = true)
     private String user;
     @Column(name="password", nullable = false , length = 100)
     private String password;
