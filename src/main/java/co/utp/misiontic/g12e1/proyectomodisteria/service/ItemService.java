@@ -1,7 +1,11 @@
 package co.utp.misiontic.g12e1.proyectomodisteria.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.ItemDto;
+import co.utp.misiontic.g12e1.proyectomodisteria.controller.dto.ProductoDto;
 import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Item;
 
 public interface ItemService {
@@ -10,5 +14,9 @@ public interface ItemService {
 
     public void insertitems(List<Item> items);
 
+    public ProductoDto getProductoDto(Item item);
 
+    public ItemDto toItemDto(Item item);
+
+    public Map cargarCarro(Long idCliente);
 }

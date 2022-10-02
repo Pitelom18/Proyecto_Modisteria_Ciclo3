@@ -14,6 +14,7 @@ import co.utp.misiontic.g12e1.proyectomodisteria.model.repository.CategoriaRepos
 import co.utp.misiontic.g12e1.proyectomodisteria.model.repository.ClienteRepository;
 import co.utp.misiontic.g12e1.proyectomodisteria.model.repository.ItemRepository;
 import co.utp.misiontic.g12e1.proyectomodisteria.model.repository.ProductoRepository;
+import co.utp.misiontic.g12e1.proyectomodisteria.service.CarroService;
 import co.utp.misiontic.g12e1.proyectomodisteria.service.ItemService;
 import co.utp.misiontic.g12e1.proyectomodisteria.service.ProductoService;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class App {
 		
 		private final ProductoService productosvc;
 		private final ItemService itemsvc;
+		private final CarroService carrosvc;
 
 		private final ProductoRepository productoRepo;
 		private final CategoriaRepository categoriaRepo;
@@ -48,14 +50,18 @@ public class App {
 
 			// loadData();
 
-
-
-			// test();
+			//test();
 
 		}
 
 		private void test() {
-			clienteRepo.findById(1001L);
+
+			
+			System.out.println(itemsvc.cargarCarro(1001L));
+
+			// var carro = carrosvc.cargarCarro(1002L);
+		
+			// System.out.println(carro.getItems().size());
 		}
 
 		private void loadData() {

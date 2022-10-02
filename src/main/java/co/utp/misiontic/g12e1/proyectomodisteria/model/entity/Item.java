@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+// @Builder
 // @Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pedido" ,
 // "producto"})})
 public class Item implements Serializable {
@@ -29,5 +29,9 @@ public class Item implements Serializable {
 
     @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 1 CHECK (quantity>= 0)")
     private Integer quantity;
+
+    public static Integer getProductoId(Item item){
+        return item.getIdItem().getProduct().getIdProducto().intValue();
+    }
 
 }

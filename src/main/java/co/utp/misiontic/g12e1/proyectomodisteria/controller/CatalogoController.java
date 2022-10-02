@@ -70,6 +70,8 @@ public class CatalogoController {
 
         return "shop";
     }
+
+    
     // @PostMapping("/shop")
     // public String goToShopa(@RequestBody FiltroRequest filtroRequest, Model
     // modelo) {
@@ -121,5 +123,11 @@ public class CatalogoController {
     public String goToContact(Model modelo) {
         modelo.addAttribute("page", "contact");
         return "contact";
+    }
+
+    @RequestMapping("/login")
+    public String goToLogin(Model modelo) {
+        modelo.addAttribute("page", "login");
+        return "login";
     }
 }
