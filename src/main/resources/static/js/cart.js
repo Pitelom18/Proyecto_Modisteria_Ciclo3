@@ -2,28 +2,20 @@ const addToCart = (productoid) => {
     let userInfo = localStorage.getItem("loggedUser");
     if (userInfo == undefined) {
         userInfo = new Map();
-        // console.log("no hay usuario");
     } else {
-        // console.log("hay usuario");
         userInfo = new Map(Object.entries(JSON.parse(userInfo)));
     }
-    // console.log(productoid);
-    // console.log(userInfo.get('carro'));
+
     carro = userInfo.get('carro');
-    if (productoid in userInfo.get('carro')) {
-        // console.log("si esta");
+    if (productoid in carro) {
+        
         carro[productoid] += 1;
-        // console.log(carro);
+        
     } else {
-        // console.log("No esta");
         carro[productoid] = 1;
-        // console.log(carro);
     }
 
     userInfo.set('carro', carro);
-    // console.log(userInfo);
-    // console.log(userInfo.get('carro'));
-
 
     localStorage.setItem("loggedUser", JSON.stringify(Object.fromEntries(userInfo)));
     updateCart();
@@ -62,23 +54,23 @@ const loadCartDetails = () => {
             let item2 = [
                 `<tr id="producto-${producto.id}">`,
                 `   <td class="align-middle"><img src=${producto.imageUrl} alt="" style="width: 50px;"> ${producto.nombre}</td>`,
-                `   <td class="align-middle" id="price-${id}">$${formatter.format(parseFloat(producto.precio))}</td>`,
+                `   <td class="align-middle" id="price-${id}">${formatter.format(parseFloat(producto.precio))}</td>`,
                 `   <td class="align-middle">`,
                 `   <div class="input-group quantity mx-auto" style="width: 100px;">`,
                 `       <div class="input-group-btn">`,
-                `           <button class="btn btn-sm btn-primary btn-minus" >`,
+                `           <button class="btn btn-sm btn-primary btn-minus" onclick="updateInputNumber(${id},-1)" >`,
                 `               <i class="fa fa-minus"></i>`,
                 `           </button>`,
                 `       </div>`,
-                `       <input type="text" id="item-${id}" value="${quantity}" class="form-control form-control-sm bg-secondary text-center" >`,
+                `       <input type="number" id="input-${id}" value="${quantity}" min="1" class="form-control form-control-sm bg-secondary text-center" onchange="updateTotalItem('${id}')">`,
                 `       <div class="input-group-btn">`,
-                `           <button class="btn btn-sm btn-primary btn-plus">`,
+                `           <button class="btn btn-sm btn-primary btn-plus" onclick="updateInputNumber(${id},1)">`,
                 `               <i class="fa fa-plus"></i>`,
                 `           </button>`,
                 `       </div>`,
                 `   </div>`,
                 `</td>`,
-                `<td class="align-middle" id="total-${id}">$${formatter.format(parseFloat(totalPrice))}</td>`,
+                `<td class="align-middle" id="total-${id}">${formatter.format(parseFloat(totalPrice))}</td>`,
                 `<td class="align-middle"><button onclick="removeItem('${id}')" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>`,
                 ` </tr>`
             ].join('\n')
@@ -89,17 +81,20 @@ const loadCartDetails = () => {
 };
 
 const updateTotalItem = (key) => {
-    const totalElem = document.getElementById("total");
 
-    let totalItemElem = document.getElementById("total-" + key);
-    let itemValue = document.getElementById("item-" + key).value;
-    let priceValue = document.getElementById("price-" + key).innerText;
+    const totalElem = document.getElementById("total");//
+    let totalItemElem = document.getElementById("total-" + key);//
+    
+    let quantity = parseIntlNumber(document.getElementById("input-" + key).value, 'en-US');
+    let price = parseIntlNumber(document.getElementById("price-" + key).innerText, 'en-US');
+    let total = parseIntlNumber(totalElem.innerText, 'en-US');
+    let totalItem = parseIntlNumber(totalItemElem.innerText, 'en-US');
 
-    let total = parseIntlNumber(totalElem.innerText, 'en-US') - parseIntlNumber(totalItemElem.innerText, 'en-US');
-
-    totalItemElem.innerText = formatter.format(parseIntlNumber(itemValue, 'en-US') * parseIntlNumber(priceValue, 'en-US'));
-    total += parseIntlNumber(totalItemElem.innerText, 'en-US');
-
+    
+    totalItemElem.innerText = formatter.format( quantity*price);
+    
+    total += quantity*price - totalItem;
+    
     totalElem.innerText = formatter.format(total);
 };
 
@@ -130,4 +125,29 @@ const removeItem = (key) => {
 
     const movieElm = document.getElementById("producto-" + key);
     movieElm.remove();
+}
+
+const updateInputNumber =(id, change)=>{
+    input = document.getElementById('input-'+id);
+    var value = parseInt(input.value, 10);
+    value = isNaN(value) ? 0 : value;
+    value+=change;
+    if(value>0){
+
+        let userInfo = localStorage.getItem("loggedUser");
+        userInfo = new Map(Object.entries(JSON.parse(userInfo)));
+
+        let carro = userInfo.get('carro');
+        carro[id]+=change;
+
+        userInfo.set('carro',carro);
+        localStorage.setItem('loggedUser',JSON.stringify(Object.fromEntries(userInfo)));
+
+
+        document.getElementById('input-'+id).value = value;
+        var event = new Event('change');
+        input.dispatchEvent(event);
+
+        
+    }
 }
