@@ -1,3 +1,4 @@
+
 const addToCart = (productoid) => {
     let userInfo = localStorage.getItem("loggedUser");
     if (userInfo == undefined) {
@@ -131,3 +132,4 @@ const removeItem = (key) => {
     const movieElm = document.getElementById("producto-" + key);
     movieElm.remove();
 }
+
