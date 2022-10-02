@@ -1,28 +1,33 @@
 
-const addToCart = (productoid) => {
+const addToCart = async (productoid) => {
     let userInfo = localStorage.getItem("loggedUser");
     if (userInfo == undefined) {
         userInfo = new Map();
     } else {
         userInfo = new Map(Object.entries(JSON.parse(userInfo)));
     }
-
     carro = userInfo.get('carro');
+
+
+    const body = {
+        "mode": "add",
+        "idcliente": userInfo.get('clienteid'),
+        "idproducto": productoid
+    };
+    console.log(productoid);
     if (productoid in carro) {
-        
         carro[productoid] += 1;
-        
     } else {
         carro[productoid] = 1;
     }
+
 
     userInfo.set('carro', carro);
 
     localStorage.setItem("loggedUser", JSON.stringify(Object.fromEntries(userInfo)));
     updateCart();
+    carroDBCrud(body);    
 }
-
-
 
 const formatter = new Intl.NumberFormat('en-US');
 
@@ -41,14 +46,14 @@ const loadCartDetails = () => {
     let detail = document.getElementById("detail");
     detail.innerText = "";
     items = new Map(Object.entries(JSON.parse(items))).get('carro');
-    
-    
+
+
     Object.entries(items)
         .forEach(async ([id, quantity]) => {
 
-            let response = await fetch('/api/producto/' + id);
+            let response = await fetch('/carro/' + id);
             let producto = await response.json();
-            
+
             const totalPrice = producto.precio * quantity;
             total += totalPrice;
 
@@ -85,17 +90,17 @@ const updateTotalItem = (key) => {
 
     const totalElem = document.getElementById("total");//
     let totalItemElem = document.getElementById("total-" + key);//
-    
+
     let quantity = parseIntlNumber(document.getElementById("input-" + key).value, 'en-US');
     let price = parseIntlNumber(document.getElementById("price-" + key).innerText, 'en-US');
     let total = parseIntlNumber(totalElem.innerText, 'en-US');
     let totalItem = parseIntlNumber(totalItemElem.innerText, 'en-US');
 
-    
-    totalItemElem.innerText = formatter.format( quantity*price);
-    
-    total += quantity*price - totalItem;
-    
+
+    totalItemElem.innerText = formatter.format(quantity * price);
+
+    total += quantity * price - totalItem;
+
     totalElem.innerText = formatter.format(total);
 };
 
@@ -109,47 +114,80 @@ const parseIntlNumber = (stringNumber, locale) => {
     );
 };
 
-const removeItem = (key) => {
+const removeItem = (idproducto) => {
     let userInfo = localStorage.getItem("loggedUser");
     userInfo = new Map(Object.entries(JSON.parse(userInfo)));
-    
+
     carro = userInfo.get('carro');
-    delete carro[key];
+    delete carro[idproducto];
     userInfo.set('carro', carro);
     localStorage.setItem("loggedUser", JSON.stringify(Object.fromEntries(userInfo)));
 
-    const totalItemValue = parseIntlNumber(document.getElementById("total-" + key).innerText, 'en-US');
+    const totalItemValue = parseIntlNumber(document.getElementById("total-" + idproducto).innerText, 'en-US');
     console.log(totalItemValue);
     const totalElem = document.getElementById("total");
 
     totalElem.innerText = formatter.format(parseIntlNumber(totalElem.innerText, 'en-US') - totalItemValue);
 
-    const movieElm = document.getElementById("producto-" + key);
+    const movieElm = document.getElementById("producto-" + idproducto);
     movieElm.remove();
+
+    const body = {
+        "mode": "delete",
+        "idcliente": userInfo.get('clienteid'),
+        "idproducto": idproducto
+    };
+
+    carroDBCrud(body);
 }
 
 
-const updateInputNumber =(id, change)=>{
-    input = document.getElementById('input-'+id);
+const updateInputNumber = (idproducto, change) => {
+    input = document.getElementById('input-' + idproducto);
     var value = parseInt(input.value, 10);
     value = isNaN(value) ? 0 : value;
-    value+=change;
-    if(value>0){
-
+    value += change;
+    if (0 < value) {
+        
         let userInfo = localStorage.getItem("loggedUser");
         userInfo = new Map(Object.entries(JSON.parse(userInfo)));
 
         let carro = userInfo.get('carro');
-        carro[id]+=change;
+        carro[idproducto] += change;
 
-        userInfo.set('carro',carro);
-        localStorage.setItem('loggedUser',JSON.stringify(Object.fromEntries(userInfo)));
+        const body = {
+            "idcliente": userInfo.get('clienteid'),
+            "idproducto": idproducto
+        };
+        console.log("idcliente",body["idcliente"]);
+        console.log("idproducto",body["idproducto"]);
+
+        if(change==1){
+            body["mode"]="add";
+        }else{
+            body["mode"]="remove";
+        }
 
 
-        document.getElementById('input-'+id).value = value;
+        userInfo.set('carro', carro);
+        localStorage.setItem('loggedUser', JSON.stringify(Object.fromEntries(userInfo)));
+
+
+        document.getElementById('input-' + idproducto).value = value;
         var event = new Event('change');
         input.dispatchEvent(event);
 
-        
+        carroDBCrud(body);
     }
+}
+
+const carroDBCrud = async (bodyObject)=> {
+    const url = '/carro';
+    const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(bodyObject),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
 }

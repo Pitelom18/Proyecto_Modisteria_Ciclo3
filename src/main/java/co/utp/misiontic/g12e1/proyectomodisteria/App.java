@@ -57,7 +57,7 @@ public class App {
 		private void test() {
 
 			
-			System.out.println(itemsvc.cargarCarro(1001L));
+			carrosvc.addItem(1001, 1001);
 
 			// var carro = carrosvc.cargarCarro(1002L);
 		
@@ -75,6 +75,7 @@ public class App {
 		private void loadItems(){
 			itemsvc.insertItem(1001L, 1001L, 2);
 			System.out.println("ITEMS GUARDADOS");
+			
 
 		}
 

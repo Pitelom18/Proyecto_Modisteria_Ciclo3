@@ -12,8 +12,6 @@ import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.Producto;
 import co.utp.misiontic.g12e1.proyectomodisteria.model.repository.CategoriaRepository;
 import co.utp.misiontic.g12e1.proyectomodisteria.model.repository.ProductoRepository;
 
-import co.utp.misiontic.g12e1.proyectomodisteria.service.CategoriaService;
-
 import co.utp.misiontic.g12e1.proyectomodisteria.service.ProductoService;
 import lombok.AllArgsConstructor;
 
@@ -22,7 +20,6 @@ import lombok.AllArgsConstructor;
 public class ProductoServiceImpl implements ProductoService {
 
     private ProductoRepository productoRepo;
-    private CategoriaServiceImpl categoriaSvc;
     private CategoriaRepository categoriaRepo;
 
     @Override
