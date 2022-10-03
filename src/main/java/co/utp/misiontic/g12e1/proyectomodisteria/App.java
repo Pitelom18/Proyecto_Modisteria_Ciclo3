@@ -64,14 +64,14 @@ public class App {
 			// System.out.println(carro.getItems().size());
 		}
 
-		private void loadData() {
+		/* private void loadData() {
 
 			System.out.println("------------LOAD-DATA------------");
 			loadCategories();
 			loadProducto();
 			loadUsers();
 			loadItems();
-		}
+		} */
 		private void loadItems(){
 			itemsvc.insertItem(1001L, 1001L, 2);
 			System.out.println("ITEMS GUARDADOS");
