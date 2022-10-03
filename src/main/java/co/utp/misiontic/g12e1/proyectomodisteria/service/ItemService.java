@@ -12,11 +12,11 @@ public interface ItemService {
 
     public void insertItem(Long cliente, Long producto, Integer cantidad);
 
-    public void insertitems(List<Item> items);
-
     public ProductoDto getProductoDto(Item item);
 
     public ItemDto toItemDto(Item item);
 
-    public Map cargarCarro(Long idCliente);
+    
+
+    
 }
