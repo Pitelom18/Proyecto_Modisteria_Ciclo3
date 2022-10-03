@@ -14,26 +14,22 @@ import co.utp.misiontic.g12e1.proyectomodisteria.model.entity.ItemPk;
 
 public interface ItemRepository extends JpaRepository<Item, ItemPk> {
 
-    
-    // @Query(" SELECT DISTINCT p "
-    //         + "FROM Producto p JOIN p.categories c "
-    //         + "WHERE c.name IN :filtros "
-    //         + "ORDER BY p.name ASC ")
+        // @Query(" SELECT DISTINCT p "
+        // + "FROM Producto p JOIN p.categories c "
+        // + "WHERE c.name IN :filtros "
+        // + "ORDER BY p.name ASC ")
 
-    @Query(" SELECT DISTINCT i "
-            + "FROM Item i JOIN i.idItem.client c "
-            + "WHERE c.idCliente = :id ")
-    Optional<List<Item>> verCarro(Long id);
+        @Query(" SELECT DISTINCT i "
+                        + "FROM Item i JOIN i.idItem.client c "
+                        + "WHERE c.idCliente = :id ")
+        Optional<List<Item>> verCarro(Long id);
 
-    @Query(value = "SELECT i.* FROM item i WHERE i.id_cliente = :idCliente AND i.id_producto = :idProducto"
-            , nativeQuery = true)
-    Optional<Item> findParticular(Long idCliente, Long idProducto);
+        @Query(value = "SELECT i.* FROM item i WHERE i.id_cliente = :idCliente AND i.id_producto = :idProducto", nativeQuery = true)
+        Optional<Item> findParticular(Long idCliente, Long idProducto);
 
-
-    @Modifying
-    @Transactional 
-    @Query(value = "DELETE FROM item i WHERE i.id_cliente = :idCliente AND i.id_producto = :idProducto"
-            , nativeQuery = true)
-    void deleteParticular(Long idCliente, Long idProducto);
+        @Modifying
+        @Transactional
+        @Query(value = "DELETE FROM item i WHERE i.id_cliente = :idCliente AND i.id_producto = :idProducto", nativeQuery = true)
+        void deleteParticular(Long idCliente, Long idProducto);
 
 }
