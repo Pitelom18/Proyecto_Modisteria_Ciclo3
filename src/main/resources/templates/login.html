@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EShopper - Bootstrap Shop Template</title>
+    <title>D'Gala Uniformes</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -27,6 +27,70 @@
 </head>
 
 <body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <!-- HEADER- Social media, help links -->
+        <!-- <div th:insert="layout/header :: header-socials-help"></div> -->
+
+        <!-- HEADER- Logo y barra de busqueda -->
+        <div th:replace="layout/header :: header-search"></div>
+
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+            
+            <!-- NAVBAR - categories -->            
+            <div th:replace="layout/navbar :: navbar-categories"></div>
+
+            <div class="col-lg-9">
+                <!-- NAVBAR- barra de navegacion a otras paginas-->
+                <div th:insert="layout/navbar :: navbar-links"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Ingreso</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="/index">Inicio</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Login</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Puedes iniciar tu sesión</span></h2>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form">
+                    <div id="success"></div>
+                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <div class="control-group">
+                            <form action="">
+                                
+                
+                                    
+                            </form>
+                        </div>
+                        
+                        
+                    </form>
+                </div>
+            </div>
+            
+    <!-- Contact End -->
 
 
     <div class="col-lg-7 mb-5">
